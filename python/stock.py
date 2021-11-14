@@ -8,13 +8,15 @@ from lib_oled96 import ssd1306
 from time import sleep
 from time import strftime
 from PIL import ImageFont, ImageDraw, Image
-font = ImageFont.load_default()
+
 
 font_file = '/home/pi/font.ttf'
 font12 = ImageFont.truetype(font_file, 12)
 font16 = ImageFont.truetype(font_file, 16)
 font24 = ImageFont.truetype(font_file, 24)
 
+fontled_file = '/home/pi/led.ttf'
+fontled = ImageFont.truetype(fontled_file, 13)
 
 from smbus import SMBus                  #  These are the only two variant lines !!
 i2cbus = SMBus(1)                        #
@@ -84,13 +86,13 @@ def show():
 				stock3_num = '1399300'
 				stock4_num = '1399006'
 				
-				stock1 = '%s %s' % (data[stock1_num]['name'], data[stock1_num]['price'])
-				stock2 = '%s %s' % (data[stock2_num]['name'], data[stock2_num]['price'])
-				stock3 = '%s  %s' % (data[stock3_num]['name'], data[stock3_num]['price'])
-				stock4 = '%s %s' % (data[stock4_num]['name'], data[stock4_num]['price'])
+				stock1 = '%s%s %s'  % ('↑' if int(data[stock1_num]['updown']) >=0 else '↓', data[stock1_num]['name'], data[stock1_num]['price'])
+				stock2 = '%s%s %s'  % ('↑' if int(data[stock2_num]['updown']) >=0 else '↓', data[stock2_num]['name'], data[stock2_num]['price'])
+				stock3 = '%s%s  %s' % ('↑' if int(data[stock2_num]['updown']) >=0 else '↓', data[stock3_num]['name'], data[stock3_num]['price'])
+				stock4 = '%s%s %s'  % ('↑' if int(data[stock3_num]['updown']) >=0 else '↓', data[stock4_num]['name'], data[stock4_num]['price'])
 				
 				
-				
+
 			#endif
 				
 		except:
@@ -99,15 +101,15 @@ def show():
 		
 		#time
 		datestr = strftime("%Y-%m-%d %H:%M:%S")
-		draw.text((6, 0), datestr, font=font12, fill=1)
+		draw.text((16, 0), datestr, font=fontled, fill=1)
 		
 		draw.line((0, 14, 128, 14), fill=1)
 		
 		#stock
-		draw.text((12, 14), stock1, font=font12, fill=1)
-		draw.text((12, 26), stock2, font=font12, fill=1)
-		draw.text((13, 38), stock3, font=font12, fill=1)
-		draw.text((12, 50), stock4, font=font12, fill=1)
+		draw.text((4, 14), stock1, font=font12, fill=1)
+		draw.text((4, 26), stock2, font=font12, fill=1)
+		draw.text((4, 38), stock3, font=font12, fill=1)
+		draw.text((4, 50), stock4, font=font12, fill=1)
 
 		
 		oled.display()
