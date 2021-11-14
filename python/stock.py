@@ -86,8 +86,8 @@ def show():
 				
 				stock1 = '%s %s' % (data[stock1_num]['name'], data[stock1_num]['price'])
 				stock2 = '%s %s' % (data[stock2_num]['name'], data[stock2_num]['price'])
-				stock3 = '%s %s' % (data[stock3_num]['name'], data[stock3_num]['price'])
-				stock4 = '%s  %s' % (data[stock4_num]['name'], data[stock4_num]['price'])
+				stock3 = '%s  %s' % (data[stock3_num]['name'], data[stock3_num]['price'])
+				stock4 = '%s %s' % (data[stock4_num]['name'], data[stock4_num]['price'])
 				
 				
 				
@@ -106,7 +106,7 @@ def show():
 		#stock
 		draw.text((12, 14), stock1, font=font12, fill=1)
 		draw.text((12, 26), stock2, font=font12, fill=1)
-		draw.text((12, 38), stock3, font=font12, fill=1)
+		draw.text((13, 38), stock3, font=font12, fill=1)
 		draw.text((12, 50), stock4, font=font12, fill=1)
 
 		
