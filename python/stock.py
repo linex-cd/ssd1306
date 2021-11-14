@@ -65,33 +65,37 @@ def show():
 				
 		#stock
 		url = 'http://api.money.126.net/data/feed/0000001,1399001,1399300,1399006'
-		ret = requests.get(url)
 		
-		if ret.status_code == 200:
-					
+		try:
 
-			data = ret.text
-		
-		
-		
-			data = data.replace('_ntes_quote_callback(','').replace(');','')
-			data = json.loads(data)
-			
-			stock1_num = '0000001'
-			stock2_num = '1399006'
-			stock3_num = '1399001'
-			stock4_num = '1399300'
-			
-			stock1 = '%s %s' % (data[stock1_num]['name'], data[stock1_num]['price'])
-			stock2 = '%s %s' % (data[stock2_num]['name'], data[stock2_num]['price'])
-			stock3 = '%s %s' % (data[stock3_num]['name'], data[stock3_num]['price'])
-			stock4 = '%s %s' % (data[stock4_num]['name'], data[stock4_num]['price'])
+			ret = requests.get(url)
+			if ret.status_code == 200:
+						
+
+				data = ret.text
 			
 			
 			
-		#endif
-			
-			
+				data = data.replace('_ntes_quote_callback(','').replace(');','')
+				data = json.loads(data)
+				
+				stock1_num = '0000001'
+				stock2_num = '1399006'
+				stock3_num = '1399001'
+				stock4_num = '1399300'
+				
+				stock1 = '%s %s' % (data[stock1_num]['name'], data[stock1_num]['price'])
+				stock2 = '%s %s' % (data[stock2_num]['name'], data[stock2_num]['price'])
+				stock3 = '%s %s' % (data[stock3_num]['name'], data[stock3_num]['price'])
+				stock4 = '%s  %s' % (data[stock4_num]['name'], data[stock4_num]['price'])
+				
+				
+				
+			#endif
+				
+		except:
+			pass
+		#endtry
 		
 		#time
 		datestr = strftime("%Y-%m-%d %H:%M:%S")
