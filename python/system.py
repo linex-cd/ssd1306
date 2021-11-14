@@ -10,9 +10,10 @@ from time import strftime
 from PIL import ImageFont, ImageDraw, Image
 font = ImageFont.load_default()
 
-font_file = 'font.ttf'
+font_file = '/home/pi/font.ttf'
 font12 = ImageFont.truetype(font_file, 12)
 font16 = ImageFont.truetype(font_file, 16)
+font20 = ImageFont.truetype(font_file, 20)
 font24 = ImageFont.truetype(font_file, 24)
 
 
@@ -35,10 +36,10 @@ def start():
 	draw.rectangle((0, 0, oled.width-1, oled.height-1), outline=1, fill=0)
 
 
-	draw.text((8, 2), '远上寒山石径斜', font=font16, fill=1)
+	draw.text((8, 1), '远上寒山石径斜', font=font16, fill=1)
 	draw.text((8, 15), '白云生处有人家', font=font16, fill=1)
-	draw.text((8, 30), '停车坐爱枫林晚', font=font16, fill=1)
-	draw.text((8, 45), '霜叶红于二月花', font=font16, fill=1)
+	draw.text((8, 29), '停车坐爱枫林晚', font=font16, fill=1)
+	draw.text((8, 43), '霜叶红于二月花', font=font16, fill=1)
 	oled.display()
 
 	sleep(3)
@@ -65,8 +66,8 @@ def show():
 		datestr = strftime("%Y-%m-%d")
 		timestr = strftime("%H:%M:%S")
 		
-		draw.text((16, 10), datestr, font=font24, fill=1)
-		draw.text((16, 30), timestr, font=font24, fill=1)
+		draw.text((16, 10), datestr, font=font20, fill=1)
+		draw.text((32, 30), timestr, font=font20, fill=1)
 		
 		#systeminfo
 		mem_percent = psutil.virtual_memory().percent
@@ -93,11 +94,11 @@ def show():
 		
 		draw.text((0, 0), memstr, font=font12, fill=1)
 		draw.text((64, 0), disktr, font=font12, fill=1)
-		draw.text((0, 52), cpustr, font=font12, fill=1)
-		draw.text((64, 52), tempstr, font=font12, fill=1)
+		draw.text((0, 49), cpustr, font=font12, fill=1)
+		draw.text((64, 49), tempstr, font=font12, fill=1)
 		
 		oled.display()
-		sleep(0.2)
+		sleep(0.5)
 	#endwhile
 #enddef
 

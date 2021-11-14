@@ -10,7 +10,7 @@ from time import strftime
 from PIL import ImageFont, ImageDraw, Image
 font = ImageFont.load_default()
 
-font_file = 'font.ttf'
+font_file = '/home/pi/font.ttf'
 font12 = ImageFont.truetype(font_file, 12)
 font16 = ImageFont.truetype(font_file, 16)
 font24 = ImageFont.truetype(font_file, 24)
@@ -38,8 +38,8 @@ def start():
 	title = strftime("股市监控系统")
 	subtitle = strftime("正在启动...")
 	
-	draw.text((16, 10), datestr, font=font24, fill=1)
-	draw.text((18, 30), timestr, font=font16, fill=1)
+	draw.text((16, 10), title, font=font16, fill=1)
+	draw.text((34, 30), subtitle, font=font12, fill=1)
 	oled.display()
 
 	sleep(3)
@@ -48,27 +48,28 @@ def start():
 
 import json
 import requests
-import psutil
+
 
 def show():
+
+	stock1 = ''
+	stock2 = ''
+	stock3 = ''
+	stock4 = ''
+	
 	while 1:
 		
+		oled.cls()
 		draw = oled.canvas
-		
-		
-		#time
-		datestr = strftime("%Y-%m-%d %H:%M:%S")
-		draw.text((0, 0), datestr, font=font12, fill=1)
-		
+				
+				
 		#stock
 		url = 'http://api.money.126.net/data/feed/0000001,1399001,1399300,1399006'
 		ret = requests.get(url)
 		
-		if ret.state_code != 200:
-			sleep(3)
-			continue
-		
-		else:
+		if ret.status_code == 200:
+					
+
 			data = ret.text
 		
 		
@@ -88,17 +89,24 @@ def show():
 			
 			
 			
-			#endif
+		#endif
 			
-			oled.cls()
 			
-			draw.text((12, 12), stock1, font=font12, fill=1)
-			draw.text((12, 24), stock2, font=font12, fill=1)
-			draw.text((12, 36), stock3, font=font12, fill=1)
-			draw.text((12, 48), stock4, font=font12, fill=1)
+		
+		#time
+		datestr = strftime("%Y-%m-%d %H:%M:%S")
+		draw.text((6, 0), datestr, font=font12, fill=1)
+		
+		draw.line((0, 14, 128, 14), fill=1)
+		
+		#stock
+		draw.text((12, 14), stock1, font=font12, fill=1)
+		draw.text((12, 26), stock2, font=font12, fill=1)
+		draw.text((12, 38), stock3, font=font12, fill=1)
+		draw.text((12, 50), stock4, font=font12, fill=1)
 
 		
-			oled.display()
+		oled.display()
 		sleep(1)
 	#endwhile
 #enddef
