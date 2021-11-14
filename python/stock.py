@@ -80,9 +80,9 @@ def show():
 				data = json.loads(data)
 				
 				stock1_num = '0000001'
-				stock2_num = '1399006'
-				stock3_num = '1399001'
-				stock4_num = '1399300'
+				stock2_num = '1399001'
+				stock3_num = '1399300'
+				stock4_num = '1399006'
 				
 				stock1 = '%s %s' % (data[stock1_num]['name'], data[stock1_num]['price'])
 				stock2 = '%s %s' % (data[stock2_num]['name'], data[stock2_num]['price'])
